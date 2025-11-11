@@ -401,3 +401,40 @@ export async function fetchAccount({ cookie }: { cookie: string }) {
     name: accountInfo.na,
   }
 }
+
+export async function fetchUsers({ cookie }: { cookie: string }) {
+  const url =
+    'https://www.mcmxiv.com/alba/ts?mod=users&cmd=usersSearch&q=&sort=user_name&order=asc'
+  const response = await fetcher<{
+    data: {
+      html: {
+        users: string
+      }
+    }
+  }>(url, {
+    method: 'GET',
+    headers: {
+      Cookie: cookie,
+    },
+  })
+  const { data } = response
+  if (!data) return null
+  const {
+    html: { users },
+  } = data
+  const dom = new JSDOM(
+    `<!DOCTYPE html><table><tbody>${users}</tbody><table></html>`
+  )
+  const rows = dom.window.document.querySelectorAll('tr')
+  const rowArray = Array.from(rows)
+  return rowArray.map(row => {
+    const idElement = row.querySelector('.muted small')
+    const id = idElement?.textContent
+    const nameElement = row.querySelector('td:nth-child(3)')
+    const name = nameElement?.textContent
+    return {
+      id,
+      name,
+    }
+  })
+}

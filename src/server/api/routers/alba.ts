@@ -4,6 +4,7 @@ import { createTRPCRouter, publicProcedure } from '@/server/api/trpc'
 import {
   fetchAccount,
   fetchTerritories,
+  fetchUsers,
   getAddressList,
   updateAlba,
 } from '@/lib/alba'
@@ -26,7 +27,6 @@ export const albaRouter = createTRPCRouter({
       if (cookie === undefined || cookie === '') {
         return []
       }
-      console.log('test')
       const search = input?.search ?? ''
       const id = input?.id ?? []
       const ids = Array.isArray(id) ? id : [id]
@@ -172,5 +172,21 @@ export const albaRouter = createTRPCRouter({
       const account = await fetchAccount({ cookie })
 
       return account
+    }),
+  getUsers: publicProcedure
+    .input(
+      z.object({
+        cookie: z.string().nullish(),
+      })
+    )
+    .query(async ({ input }) => {
+      const cookie = input?.cookie ?? undefined
+      if (cookie === undefined || cookie === '') {
+        return null
+      }
+
+      const users = await fetchUsers({ cookie })
+
+      return users
     }),
 })

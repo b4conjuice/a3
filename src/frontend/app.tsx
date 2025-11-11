@@ -2,7 +2,7 @@ import { BrowserRouter, Route, Routes } from 'react-router'
 
 import HomePage from '@/frontend/routes/home'
 import AssignedPage from '@/frontend/routes/assigned'
-import Layout from '@/components/layout'
+import Layout from '@/frontend/layout'
 
 export default function App() {
   return (
@@ -11,9 +11,9 @@ export default function App() {
         <Route element={<Layout />}>
           <Route>
             <Route path='/' element={<HomePage />} />
-            <Route path='/assigned' element={<AssignedPage />} />
           </Route>
         </Route>
+        <Route path='/assigned' element={<AssignedPage />} />
       </Routes>
     </BrowserRouter>
   )

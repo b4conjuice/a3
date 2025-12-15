@@ -433,8 +433,8 @@ export async function fetchUsers({ cookie }: { cookie: string }) {
     const nameElement = row.querySelector('td:nth-child(3)')
     const name = nameElement?.textContent
     return {
-      id,
-      name,
+      id: id ? Number(id) : 0,
+      name: name ?? '',
     }
   })
 }

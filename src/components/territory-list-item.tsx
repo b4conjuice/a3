@@ -107,29 +107,30 @@ export default function TerritoryListItem({
             />
           </Link>
         </li>
-        {url && (
-          <li className='grow'>
-            <a href={url} target='_blank' rel='noopener noreferrer'>
-              <ArrowTopRightOnSquareIcon className='text-cb-yellow hover:text-cb-yellow/75 h-6 w-6' />
-            </a>
-          </li>
-        )}
-        {url && (
-          <li className='grow'>
-            <Link
-              to={`/territories/${id ?? ''}/${(url ?? '').replace(
-                mcmxivUrl,
-                ''
-              )}${q ? `?q=${q}` : ''}`}
-              className={classNames(
-                'text-cb-yellow hover:text-cb-yellow/75',
-                url ? '' : 'pointer-events-none cursor-default opacity-25'
-              )}
-            >
-              <ListBulletIcon className='h-6 w-6' />
-            </Link>
-          </li>
-        )}
+        <li className='grow'>
+          <a
+            href={url ?? ''}
+            target='_blank'
+            rel='noopener noreferrer'
+            className={classNames(!url && 'pointer-events-none opacity-25')}
+          >
+            <ArrowTopRightOnSquareIcon className='text-cb-yellow hover:text-cb-yellow/75 h-6 w-6' />
+          </a>
+        </li>
+        <li className='grow'>
+          <Link
+            to={`/territories/${id ?? ''}/${(url ?? '').replace(
+              mcmxivUrl,
+              ''
+            )}${q ? `?q=${q}` : ''}`}
+            className={classNames(
+              'text-cb-yellow hover:text-cb-yellow/75',
+              url ? '' : 'pointer-events-none cursor-default opacity-25'
+            )}
+          >
+            <ListBulletIcon className='h-6 w-6' />
+          </Link>
+        </li>
         <li className='grow'>
           <a href={print} target='_blank' rel='noopener noreferrer'>
             <PrinterIcon className='text-cb-yellow hover:text-cb-yellow/75 h-6 w-6' />

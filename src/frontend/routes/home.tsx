@@ -13,6 +13,10 @@ const nav = [
     url: '/users',
     text: 'users',
   },
+  {
+    url: '/assignments',
+    text: 'assignments',
+  },
 ]
 
 export default function HomePage() {

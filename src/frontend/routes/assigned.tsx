@@ -1,3 +1,4 @@
+import { useState } from 'react'
 import { useSearchParams, useNavigate, NavLink as Link } from 'react-router'
 import { ChevronLeftIcon, XMarkIcon } from '@heroicons/react/20/solid'
 import { useDebounce, useLocalStorage } from '@uidotdev/usehooks'
@@ -6,10 +7,10 @@ import Layout from '@/components/layout'
 import LoadingIcon from '@/components/ui/loading-icon'
 import TerritoryListItem from '@/components/territory-list-item'
 import { api } from '@/trpc/react'
-import { useState } from 'react'
+import useAccountCookie from '@/lib/useAccountCookie'
 
 export default function AssignedPage() {
-  const [cookie] = useLocalStorage('a3-cookie', '')
+  const { cookie } = useAccountCookie()
 
   const navigate = useNavigate()
   const [searchParams] = useSearchParams()

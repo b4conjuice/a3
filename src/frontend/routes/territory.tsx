@@ -15,7 +15,6 @@ import {
 } from '@heroicons/react/20/solid'
 import classNames from 'classnames'
 // import { useHotkeys } from 'react-hotkeys-hook'
-import { useLocalStorage } from '@uidotdev/usehooks'
 
 import { Main, Title } from '@/components/ui'
 import LoadingIcon from '@/components/ui/loading-icon'
@@ -27,6 +26,7 @@ import Assignment from '@/components/assignment'
 import Modal from '@/components/modal'
 import mcmxivUrl from '@/lib/alba/mcmxiv-url'
 import Layout from '@/components/layout'
+import useAccountCookie from '@/lib/useAccountCookie'
 
 export default function TerritoryPage() {
   const navigate = useNavigate()
@@ -37,7 +37,7 @@ export default function TerritoryPage() {
   const [searchParams] = useSearchParams()
   const q = searchParams.get('q')
 
-  const [cookie] = useLocalStorage('a3-cookie', '')
+  const { cookie } = useAccountCookie()
   const { data: territory, isLoading: isLoadingTerritory } =
     api.alba.getTerritoryById.useQuery({
       id: id!,

@@ -8,7 +8,7 @@ import Button from '@/components/ui/button'
 import { api } from '@/trpc/react'
 // import users from '@/config/users'
 import type { Assignment } from '@/lib/alba/types'
-import { useLocalStorage } from '@uidotdev/usehooks'
+import useAccountCookie from '@/lib/useAccountCookie'
 
 const DATE_FORMAT = 'yyyy-MM-dd'
 
@@ -24,7 +24,7 @@ export default function Assign({
 }: {
   assignment: Omit<Assignment, 'id'>
 }) {
-  const [cookie] = useLocalStorage('a3-cookie', '')
+  const { cookie } = useAccountCookie()
   const { data: usersData, isLoading: isLoadingUsers } =
     api.alba.getUsers.useQuery({
       cookie,

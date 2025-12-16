@@ -1,8 +1,8 @@
 import { NavLink as Link } from 'react-router'
-import { useLocalStorage } from '@uidotdev/usehooks'
-
-import { api } from '@/trpc/react'
 import classNames from 'classnames'
+
+import useAccountCookie from '@/lib/useAccountCookie'
+import { api } from '@/trpc/react'
 
 const nav = [
   {
@@ -20,7 +20,7 @@ const nav = [
 ]
 
 export default function HomePage() {
-  const [cookie] = useLocalStorage('a3-cookie', '')
+  const { cookie } = useAccountCookie()
   const { data: account } = api.alba.getAccount.useQuery({
     cookie,
   })

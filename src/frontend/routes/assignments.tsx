@@ -12,9 +12,10 @@ import { api } from '@/trpc/react'
 // import users from '@/config/users'
 import TerritoryListItem from '@/components/territory-list-item'
 import Layout from '@/components/layout'
+import useAccountCookie from '@/lib/useAccountCookie'
 
 export default function AssignmentsPage() {
-  const [cookie] = useLocalStorage('a3-cookie', '')
+  const { cookie } = useAccountCookie()
   // const [searchParams] = useSearchParams()
   // const q = searchParams.get('q')
   // const [search, setSearch] = useState(q ?? '')

@@ -1,10 +1,10 @@
 import { useState } from 'react'
 import { NavLink as Link, useLocation } from 'react-router'
-import { useLocalStorage } from '@uidotdev/usehooks'
 
 import { Title } from '@/components/ui'
 import Modal from '@/components/modal'
 import { api } from '@/trpc/react'
+import useAccountCookie from '@/lib/useAccountCookie'
 
 const title = 'a3'
 
@@ -13,7 +13,7 @@ export default function Header() {
   const pathname = location.pathname
 
   const [isLoginModalOpen, setIsLoginModalOpen] = useState(false)
-  const [cookie, setCookie] = useLocalStorage('a3-cookie', '')
+  const { cookie, setCookie } = useAccountCookie()
   const { data: account } = api.alba.getAccount.useQuery({
     cookie,
   })

@@ -1,13 +1,13 @@
 import { NavLink as Link } from 'react-router'
 import { ChevronLeftIcon } from '@heroicons/react/20/solid'
-import { useLocalStorage } from '@uidotdev/usehooks'
 
 import Layout from '@/components/layout'
 import LoadingIcon from '@/components/ui/loading-icon'
 import { api } from '@/trpc/react'
+import useAccountCookie from '@/lib/useAccountCookie'
 
 export default function UsersPage() {
-  const [cookie] = useLocalStorage('a3-cookie', '')
+  const { cookie } = useAccountCookie()
   const { data: users, isLoading } = api.alba.getUsers.useQuery({
     cookie,
   })
